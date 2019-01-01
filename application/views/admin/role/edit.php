@@ -26,7 +26,7 @@
         </div>
         <!-- /. Content Header (Page header) -->
 
-        <form method="post" action="<?php echo base_url() ?>role/update" enctype="multipart/form-data">
+        <form method="post" action="<?php echo base_url() ?>admin/role/update" enctype="multipart/form-data">
             <input type="hidden" name="role_id" value="<?php echo $user_type['id'] ?>">
             <div class="row">
                 <div class="col-sm-12">

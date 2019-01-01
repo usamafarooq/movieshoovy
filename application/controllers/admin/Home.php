@@ -16,10 +16,10 @@ class Home extends MY_Controller {
 	{
 		if ( $this->permission['view'] == '0' && $this->permission['view_all'] == '0' ) 
 		{
-			redirect('home');
+			redirect('admin/home');
 		}
 		$this->data['title'] = 'Dashboard';
-		$this->load->template('home',$this->data);
+		$this->load->template('admin/home',$this->data);
 	}
 
 }

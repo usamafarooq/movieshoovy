@@ -1,4 +1,5 @@
-		<!-- /.Navbar  Static Side -->
+
+			<!-- /.Navbar  Static Side -->
 			<div class="control-sidebar-bg"></div>
 			<!-- Page Content -->
 			<div id="page-wrapper">
@@ -10,12 +11,12 @@
 							<i class="pe-7s-box1"></i>
 						</div>
 						<div class="header-title">
-							<h1>View Users</h1>
+							<h1>View Role</h1>
 							<small> </small>
 							<ol class="breadcrumb">
 								<li><a href="<?php echo base_url() ?>"><i class="pe-7s-home"></i> Home</a></li>
 
-								<li class="active">View Users</li>
+								<li class="active">View Role</li>
 							</ol>
 						</div>
 					</div> <!-- /. Content Header (Page header) -->
@@ -25,11 +26,11 @@
 							<div class="panel panel-bd">
 								<div class="panel-heading">
 									<div class="panel-title">
-										<h4>View Users</h4>
+										<h4>View Role</h4>
 										<?php 
 											if ($permission['created'] == '1') {
 										?>
-										<a href="<?php echo base_url('users/create') ?>"><button class="btn btn-info pull-right">Add Users</button></a>
+										<a href="<?php echo base_url('admin/role/create') ?>"><button class="btn btn-info pull-right">Add Role</button></a>
 										<?php } ?>
 									</div>
 								</div>
@@ -41,10 +42,8 @@
 												<tr>
 													<th>Id</th>
 													<th>Name</th>
-													<th>Email</th>
-													<th>Role</th>
 													<?php 
-														if ($permission['edit'] == '1' || $permission['deleted'] == '1'){
+														if ($permission['edit'] == '1' || $permission['deleted'] == '1') {
 													?>
 													<th>Action</th>
 													<?php } ?>
@@ -52,13 +51,11 @@
 											</thead>
 										    <tbody>
 										    	<?php
-										    		foreach ($users as $user) {
+										    		foreach ($roles as $role) {
 										    	?>
 												<tr>
-													<td><?php echo $user['id'] ?></td>
-													<td><?php echo $user['name'] ?></td>
-													<td><?php echo $user['email'] ?></td>
-													<td><?php echo $user['role'] ?></td>
+													<td><?php echo $role['id'] ?></td>
+													<td><?php echo $role['name'] ?></td>
 													<?php 
 														if ($permission['edit'] == '1' || $permission['deleted'] == '1'){
 													?>
@@ -66,12 +63,12 @@
 														<?php 
 															if ($permission['edit'] == '1') {
 														?>
-														<a href="<?php echo base_url() ?>users/edit/<?php echo $user['id'] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="View Order" alt="View Order" width="35" height="35"></a>
+														<a href="<?php echo base_url() ?>admin/role/edit/<?php echo $role['id'] ?>"><img src="<?php echo base_url() ?>assets/record1.png" title="View Order" alt="View Order" width="35" height="35"></a>
 														<?php } ?>
 														<?php 
 															if ($permission['deleted'] == '1') {
 														?>
-		                                                <a href="<?php echo base_url() ?>users/delete/<?php echo $user['id'] ?>"><img src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="35" height="35"></a>
+		                                                <a href="<?php echo base_url() ?>admin/role/delete/<?php echo $role['id'] ?>"><img src="<?php echo base_url() ?>assets/d-icon.png" title="Delete" alt="Delete" width="35" height="35"></a>
 		                                                <?php } ?>
 	                                                </td>
 	                                                <?php } ?>
@@ -90,6 +87,7 @@
 			</div><!-- /#page-wrapper -->
 		</div><!-- /#wrapper -->
 		<!-- START CORE PLUGINS -->
+
 
 
 

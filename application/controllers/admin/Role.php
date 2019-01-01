@@ -17,7 +17,7 @@ class Role extends MY_Controller {
 	{
 		if ( $this->permission['view'] == '0' && $this->permission['view_all'] == '0' ) 
 		{
-			redirect('home');
+			redirect('admin/home');
 		}
 		$this->data['title'] = 'Roles';
 		if ( $this->permission['view_all'] == '1'){
@@ -27,25 +27,25 @@ class Role extends MY_Controller {
 			$this->data['roles'] = $this->Role_model->get_rows('user_type',array('user_id'=>$this->id));
 		}
 		$this->data['permission'] = $this->permission;
-		$this->load->template('role/index',$this->data);
+		$this->load->template('admin/role/index',$this->data);
 	}
 
 	public function create()
 	{
 		if ( $this->permission['created'] == '0') 
 		{
-			redirect('home');
+			redirect('admin/home');
 		}
 		$this->data['title'] = 'Create Role';
 		$this->data['modules'] = $this->Role_model->all_rows('modules');
-		$this->load->template('role/create',$this->data);
+		$this->load->template('admin/role/create',$this->data);
 	}
 
 	public function insert()
 	{
 		if ( $this->permission['created'] == '0') 
 		{
-			redirect('home');
+			redirect('admin/home');
 		}
 		$data['modules'] = $this->Role_model->all_rows('modules');
 		$role = array(
@@ -70,27 +70,27 @@ class Role extends MY_Controller {
 			
 		}
 		$this->Role_model->insert_batch('permission',$permission);
-		redirect('role');
+		redirect('admin/role');
 	}
 
 	public function edit($id)
 	{
 		if ($this->permission['edit'] == '0') 
 		{
-			redirect('home');
+			redirect('admin/home');
 		}
 		$this->data['title'] = 'Edit Role';
 		$this->data['modules'] = $this->Role_model->all_rows('modules');
 		$this->data['user_type'] = $this->Role_model->get_row_single('user_type',array('id'=>$id));
 		$this->data['permission'] = $this->Role_model->get_rows('permission',array('user_type_id'=>$id));
-		$this->load->template('role/edit',$this->data);
+		$this->load->template('admin/role/edit',$this->data);
 	}
 
 	public function update()
 	{
 		if ($this->permission['edit'] == '0') 
 		{
-			redirect('home');
+			redirect('admin/home');
 		}
 		$data['modules'] = $this->Role_model->all_rows('modules');
 		$role = array(
@@ -115,17 +115,17 @@ class Role extends MY_Controller {
 			
 		}
 		$this->Role_model->insert_batch('permission',$permission);
-		redirect('role');
+		redirect('admin/role');
 	}
 
 	public function delete($id)
 	{
 		if ( $this->permission['deleted'] == '0') 
 		{
-			redirect('home');
+			redirect('admin/home');
 		}
 		$this->Role_model->delete('user_type',array('id'=>$id));
 		$this->Role_model->delete('permission',array('user_type_id'=>$id));
-		redirect('role');
+		redirect('admin/role');
 	}
 }

@@ -17,7 +17,7 @@ class Users extends MY_Controller {
     {
         if ( $this->permission['view'] == '0' && $this->permission['view_all'] == '0' ) 
         {
-            redirect('home');
+            redirect('admin/home');
         }
         $this->data['title'] = 'Users';
         if ( $this->permission['view_all'] == '1'){
@@ -27,41 +27,41 @@ class Users extends MY_Controller {
             $this->data['users'] = $this->User_model->get_users($this->id);
         }
         $this->data['permission'] = $this->permission;
-        $this->load->template('user/index',$this->data);
+        $this->load->template('admin/user/index',$this->data);
     }
 
     public function create()
     {
         if ( $this->permission['created'] == '0') 
         {
-            redirect('home');
+            redirect('admin/home');
         }
         $this->data['title'] = 'Create User';
         $this->data['role'] = $this->User_model->all_rows('user_type');
-        $this->load->template('user/create',$this->data);
+        $this->load->template('admin/user/create',$this->data);
     }
 
     public function insert()
     {
         if ( $this->permission['created'] == '0') 
         {
-            redirect('home');
+            redirect('admin/home');
         }
         $data = $this->input->post();
         $username = $this->User_model->get_row_single('users',array('name'=>$data['name']));
         if (!empty($username)) {
             $this->session->set_flashdata('error', 'Username Already Exist');
-            redirect("users/create");
+            redirect("admin/users/create");
         }
         $email = $this->User_model->get_row_single('users',array('email'=>$data['email']));
         if (!empty($email)) {
             $this->session->set_flashdata('error', 'Email Already Exist');
-            redirect("users/create");
+            redirect("admin/users/create");
         }
         $data['password'] = md5($data['password']);
         $id = $this->User_model->insert('users',$data);
         if ($id) {
-            redirect('users');
+            redirect('admin/users');
         }
     }
 
@@ -69,19 +69,19 @@ class Users extends MY_Controller {
     {
         if ($this->permission['edit'] == '0') 
         {
-            redirect('home');
+            redirect('admin/home');
         }
         $this->data['title'] = 'Edit Module';
         $this->data['user'] = $this->User_model->get_row_single('users',array('id'=>$id));
         $this->data['role'] = $this->User_model->all_rows('user_type');
-        $this->load->template('user/edit',$this->data);
+        $this->load->template('admin/user/edit',$this->data);
     }
 
     public function update()
     {
         if ( $this->permission['edit'] == '0') 
         {
-            redirect('home');
+            redirect('admin/home');
         }
         $data = $this->input->post();
         $id = $data['id'];
@@ -94,7 +94,7 @@ class Users extends MY_Controller {
         }
         $id = $this->User_model->update('users',$data,array('id'=>$id));
         if ($id) {
-            redirect('users');
+            redirect('admin/users');
         }
     }
 
@@ -102,9 +102,9 @@ class Users extends MY_Controller {
     {
         if ( $this->permission['deleted'] == '0') 
         {
-            redirect('home');
+            redirect('admin/home');
         }
         $this->User_model->delete('users',array('id'=>$id));
-        redirect('users');
+        redirect('admin/users');
     }
 }

@@ -13,13 +13,13 @@ class Register extends CI_Controller {
 	public function index()
 	{
 		$data['role'] = $this->Register_model->all_rows('user_type');
-		$this->load->view('register',$data);
+		$this->load->view('admin/register',$data);
 	}
 
 	public function is_login()
 	{
 		if ($this->session->userdata('user_id')) {
-			redirect("home");
+			redirect("admin/home");
 		}
 	}
 
@@ -29,17 +29,17 @@ class Register extends CI_Controller {
 		$username = $this->Register_model->get_row_single('users',array('name'=>$data['name']));
 		if (!empty($username)) {
 			$this->session->set_flashdata('error', 'Username Already Exist');
-			redirect("Register");
+			redirect("admin/Register");
 		}
 		$email = $this->Register_model->get_row_single('users',array('email'=>$data['email']));
 		if (!empty($email)) {
 			$this->session->set_flashdata('error', 'Email Already Exist');
-			redirect("Register");
+			redirect("admin/Register");
 		}
 		$data['password'] = md5($data['password']);
 		$id = $this->Register_model->insert('users',$data);
 		if ($id) {
-			redirect('login');
+			redirect('admin/login');
 		}
 	}
 }

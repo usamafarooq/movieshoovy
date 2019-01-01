@@ -21,7 +21,7 @@
         </div>
         <!-- /. Content Header (Page header) -->
 
-        <form method="post" action="<?php echo base_url() ?>modules/fields_insert" enctype="multipart/form-data">
+        <form method="post" action="<?php echo base_url() ?>admin/modules/fields_insert" enctype="multipart/form-data">
             <input type="hidden" name="module_id" value="<?php echo $id ?>">
             <div class="row">
                 <div class="col-sm-12">
@@ -239,7 +239,7 @@
                 var value = $(this).val()
                 $.ajax({
                   type: "GET",
-                  url: "<?php echo base_url('modules/get_colume/') ?>"+value,
+                  url: "<?php echo base_url('admin/modules/get_colume/') ?>"+value,
                   dataType: 'json',
                   success: function(html)
                   {

@@ -17,7 +17,7 @@ class Modules extends MY_Controller {
 	{
 		if ( $this->permission['view'] == '0' && $this->permission['view_all'] == '0' ) 
 		{
-			redirect('home');
+			redirect('admin/home');
 		}
 		$this->data['title'] = 'Modules';
 		if ( $this->permission['view_all'] == '1'){
@@ -27,30 +27,30 @@ class Modules extends MY_Controller {
 			$this->data['modules'] = $this->Modules_model->get_rows('modules',array('user_id'=>$this->id));
 		}
 		$this->data['permission'] = $this->permission;
-		$this->load->template('module/index',$this->data);
+		$this->load->template('admin/module/index',$this->data);
 	}
 
 	public function create()
 	{
 		if ( $this->permission['created'] == '0') 
 		{
-			redirect('home');
+			redirect('admin/home');
 		}
 		$this->data['title'] = 'Create Module';
-		$this->load->template('module/create',$this->data);
+		$this->load->template('admin/module/create',$this->data);
 	}
 
 	public function insert()
 	{
 		if ( $this->permission['created'] == '0') 
 		{
-			redirect('home');
+			redirect('admin/home');
 		}
 		$data = $this->input->post();
 		$data['user_id'] = $this->session->userdata('user_id');
 		$id = $this->Modules_model->insert('modules',$data);
 		if ($id) {
-			redirect('modules/fileds/'.$id);
+			redirect('admin/modules/fileds/'.$id);
 		}
 	}
 
@@ -64,12 +64,12 @@ class Modules extends MY_Controller {
 	{
 		if ( $this->permission['created'] == '0') 
 		{
-			redirect('home');
+			redirect('admin/home');
 		}
 		$this->data['tables'] = $this->db->list_tables();
 		$this->data['id'] = $id;
 		$this->data['title'] = 'Create Fileds';
-		$this->load->template('module/fileds',$this->data);
+		$this->load->template('admin/module/fileds',$this->data);
 	}
 
 	public function fields_insert()
@@ -142,7 +142,7 @@ class Modules extends MY_Controller {
 		$this->create_main_view($url,$url.'_model',$tablename,$fileds);
 		$this->create_create_view($url,$url.'_model',$tablename,$fileds);
 		$this->create_edit_view($url,$url.'_model',$tablename,$fileds);
-		redirect('modules');
+		redirect('admin/modules');
 	}
 
 	public function get_old_data($id)
@@ -158,32 +158,32 @@ class Modules extends MY_Controller {
 		$this->create_main_view($url,$url.'_model',$tablename,$fileds);
 		$this->create_create_view($url,$url.'_model',$tablename,$fileds);
 		$this->create_edit_view($url,$url.'_model',$tablename,$fileds);
-		redirect('modules');
+		redirect('admin/modules');
 	}
 
 	public function edit($id)
 	{
 		if ($this->permission['edit'] == '0') 
 		{
-			redirect('home');
+			redirect('admin/home');
 		}
 		$this->data['title'] = 'Edit Module';
 		$this->data['module'] = $this->Modules_model->get_row_single('modules',array('id'=>$id));
-		$this->load->template('module/edit',$this->data);
+		$this->load->template('admin/module/edit',$this->data);
 	}
 
 	public function update()
 	{
 		if ( $this->permission['edit'] == '0') 
 		{
-			redirect('home');
+			redirect('admin/home');
 		}
 		$data = $this->input->post();
 		$id = $data['id'];
 		unset($data['id']);
 		$id = $this->Modules_model->update('modules',$data,array('id'=>$id));
 		if ($id) {
-			redirect('modules');
+			redirect('admin/modules');
 		}
 	}
 
@@ -191,10 +191,10 @@ class Modules extends MY_Controller {
 	{
 		if ( $this->permission['deleted'] == '0') 
 		{
-			redirect('home');
+			redirect('admin/home');
 		}
 		$this->Modules_model->delete('modules',array('id'=>$id));
-		redirect('modules');
+		redirect('admin/modules');
 	}
 
 }

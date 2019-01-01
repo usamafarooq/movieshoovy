@@ -12,13 +12,13 @@ class Login extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('login');
+		$this->load->view('admin/login');
 	}
 
 	public function is_login()
 	{
 		if ($this->session->userdata('user_id')) {
-			redirect("home");
+			redirect("admin/home");
 		}
 	}
 
@@ -29,11 +29,11 @@ class Login extends CI_Controller {
 		if (!empty($user)) {
 			$this->session->set_userdata('user_id', $user['id']);
 			$this->session->set_userdata('user_type', $user['role']);
-			redirect("home");
+			redirect("admin/home");
 		}
 		else{
 			$this->session->set_flashdata('error', 'Email and Password do not match');
-			redirect("login");
+			redirect("admin/login");
 		}
 	}
 }
